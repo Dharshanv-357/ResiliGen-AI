@@ -1,0 +1,128 @@
+import { SimulationResult, SimulationEvent, HistoryEntry } from '../types/simulation';
+
+export const originalSimulationResult: SimulationResult = {
+  id: 'sim-001',
+  planId: 'plan-001',
+  scenarioId: 'SCN-0381',
+  foodCollectedKg: 410,
+  foodDeliveredKg: 286,
+  foodWastedKg: 124,
+  unmetDemandKg: 134,
+  averageDeliveryTimeMin: 48,
+  vehicleUtilization: 96,
+  ngoCapacityUtilization: 98,
+  expiryViolations: 3,
+  riskScore: 78,
+  successRate: 68,
+  timestamp: new Date().toISOString(),
+  isImproved: false,
+};
+
+export const improvedSimulationResult: SimulationResult = {
+  id: 'sim-002',
+  planId: 'plan-001',
+  scenarioId: 'SCN-0381',
+  foodCollectedKg: 410,
+  foodDeliveredKg: 362,
+  foodWastedKg: 48,
+  unmetDemandKg: 39,
+  averageDeliveryTimeMin: 21,
+  vehicleUtilization: 82,
+  ngoCapacityUtilization: 74,
+  expiryViolations: 0,
+  riskScore: 31,
+  successRate: 91,
+  timestamp: new Date().toISOString(),
+  isImproved: true,
+};
+
+export const mockSimulationEvents: SimulationEvent[] = [
+  { id: 'evt-001', timestamp: '18:21:04', type: 'info', message: 'Simulation initialized. Loading plan: City Evening Redistribution', component: 'System' },
+  { id: 'evt-002', timestamp: '18:21:07', type: 'info', message: 'Vehicle V1 departed from Gandhipuram Hub → NGO-01', component: 'Vehicle V1' },
+  { id: 'evt-003', timestamp: '18:21:09', type: 'info', message: 'Vehicle V2 departed from RS Puram Hub → NGO-02', component: 'Vehicle V2' },
+  { id: 'evt-004', timestamp: '18:21:12', type: 'warning', message: 'Traffic spike detected on Avinashi Road — +45% congestion', component: 'Traffic Monitor' },
+  { id: 'evt-005', timestamp: '18:21:16', type: 'error', message: '🔴 VEHICLE BREAKDOWN: V2 reported mechanical failure near Peelamedu junction', component: 'Vehicle V2' },
+  { id: 'evt-006', timestamp: '18:21:19', type: 'warning', message: 'Reduced transport capacity: 3/4 vehicles operational', component: 'Fleet Manager' },
+  { id: 'evt-007', timestamp: '18:21:22', type: 'warning', message: 'NGO-03 (AnnaDanam Trust) capacity at 89% — approaching limit', component: 'NGO-03' },
+  { id: 'evt-008', timestamp: '18:21:28', type: 'error', message: '🔴 NGO-03 capacity reached (98%) — incoming deliveries redirected', component: 'NGO-03' },
+  { id: 'evt-009', timestamp: '18:21:33', type: 'warning', message: 'Average delivery delay increased to 28 minutes due to rerouting', component: 'Route Optimizer' },
+  { id: 'evt-010', timestamp: '18:21:38', type: 'error', message: '⚠️ FOOD EXPIRY ALERT: 42 kg from Restaurant A approaching 2-hour expiry limit', component: 'Expiry Monitor' },
+  { id: 'evt-011', timestamp: '18:21:44', type: 'error', message: '🔴 UNMET DEMAND: Area 3 (Ganapathy) — 134 kg demand cannot be fulfilled', component: 'Demand Tracker' },
+  { id: 'evt-012', timestamp: '18:21:49', type: 'error', message: '🔴 EXPIRY VIOLATION: 24 kg food exceeded expiry window — marked as waste', component: 'Expiry Monitor' },
+  { id: 'evt-013', timestamp: '18:22:04', type: 'info', message: 'Simulation complete. Risk Score: 78/100 — CRITICAL', component: 'System' },
+];
+
+export const mockHistoryEntries: HistoryEntry[] = [
+  {
+    id: 'hist-001',
+    planName: 'City Evening Food Redistribution',
+    date: '30/09/2026',
+    scenarioCount: 1000,
+    originalRisk: 78,
+    finalRisk: 31,
+    improvementPercent: 60.3,
+    status: 'completed',
+  },
+  {
+    id: 'hist-002',
+    planName: 'North Zone Breakfast Drive',
+    date: '25/09/2026',
+    scenarioCount: 500,
+    originalRisk: 54,
+    finalRisk: 28,
+    improvementPercent: 48.1,
+    status: 'completed',
+  },
+  {
+    id: 'hist-003',
+    planName: 'Weekend Surplus Collection',
+    date: '20/09/2026',
+    scenarioCount: 500,
+    originalRisk: 42,
+    finalRisk: 19,
+    improvementPercent: 54.8,
+    status: 'completed',
+  },
+  {
+    id: 'hist-004',
+    planName: 'Emergency Flood Relief Distribution',
+    date: '15/09/2026',
+    scenarioCount: 1000,
+    originalRisk: 89,
+    finalRisk: 52,
+    improvementPercent: 41.6,
+    status: 'completed',
+  },
+  {
+    id: 'hist-005',
+    planName: 'Festival Season Surge Plan',
+    date: '10/09/2026',
+    scenarioCount: 500,
+    originalRisk: 65,
+    finalRisk: 0,
+    improvementPercent: 0,
+    status: 'in_progress',
+  },
+];
+
+export const riskBreakdownData = [
+  { factor: 'Vehicle Failure', value: 82, color: '#ef4444' },
+  { factor: 'Demand Spike', value: 76, color: '#f97316' },
+  { factor: 'Food Expiry', value: 69, color: '#f59e0b' },
+  { factor: 'NGO Capacity', value: 53, color: '#eab308' },
+  { factor: 'Traffic Delay', value: 48, color: '#84cc16' },
+  { factor: 'Donation Shortage', value: 41, color: '#22c55e' },
+];
+
+export const comparisonChartData = [
+  { scenario: 'SCN-0001', original: 45, improved: 22 },
+  { scenario: 'SCN-0050', original: 68, improved: 31 },
+  { scenario: 'SCN-0100', original: 52, improved: 25 },
+  { scenario: 'SCN-0150', original: 78, improved: 31 },
+  { scenario: 'SCN-0200', original: 91, improved: 42 },
+  { scenario: 'SCN-0250', original: 34, improved: 18 },
+  { scenario: 'SCN-0300', original: 62, improved: 28 },
+  { scenario: 'SCN-0350', original: 85, improved: 38 },
+  { scenario: 'SCN-0381', original: 78, improved: 31 },
+  { scenario: 'SCN-0400', original: 55, improved: 24 },
+];
