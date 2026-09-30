@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard, ClipboardList, Zap, Activity, AlertTriangle,
   Users, Lightbulb, History, Settings, Database, Server,
-  ChevronLeft, ChevronRight, Brain, ShieldAlert, TrendingUp
+  ChevronLeft, ChevronRight, Brain, ShieldAlert, TrendingUp, ImageIcon
 } from 'lucide-react';
 import { cn } from '../../utils/formatters';
 import { useAppStore } from '../../store/useAppStore';
@@ -28,6 +28,7 @@ const navGroups = [
     label: 'SYSTEM',
     items: [
       { id: 'models', label: 'Model Status', icon: Server, path: '/models' },
+      { id: 'food-condition', label: 'DCGAN Food Quality', icon: ImageIcon, path: '/food-condition' },
       { id: 'dataset', label: 'Dataset', icon: Database, path: '/dataset' },
       { id: 'settings', label: 'Settings', icon: Settings, path: '/settings' },
     ],

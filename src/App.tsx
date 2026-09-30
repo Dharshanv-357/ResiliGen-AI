@@ -13,6 +13,7 @@ import { Comparison } from './pages/Comparison';
 import { History } from './pages/History';
 import { Models } from './pages/Models';
 import { Dataset } from './pages/Dataset';
+import { FoodCondition } from './pages/FoodCondition';
 import { Settings } from './pages/Settings';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path="/comparison" element={<Comparison />} />
           <Route path="/history" element={<History />} />
           <Route path="/models" element={<Models />} />
+          <Route path="/food-condition" element={<FoodCondition />} />
           <Route path="/dataset" element={<Dataset />} />
           <Route path="/settings" element={<Settings />} />
         </Route>

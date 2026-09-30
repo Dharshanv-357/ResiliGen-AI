@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Server, Database, Brain, Zap, Activity, CheckCircle2, ChevronRight, X } from 'lucide-react';
+import { Server, Database, Brain, Zap, Activity, CheckCircle2, ChevronRight, X, ImageIcon } from 'lucide-react';
 import { Card } from '../components/ui/Card';
 
 const pipelineSteps = [
@@ -35,6 +35,17 @@ const pipelineSteps = [
     purpose: 'Generate realistic synthetic food redistribution scenarios conditioned on stress parameters.',
     input: 'Historical data + stress condition labels (low/medium/high/critical)',
     output: 'Synthetic numerical scenarios with realistic distributions',
+    status: 'Trained',
+  },
+  {
+    id: 'dcgan',
+    label: 'DCGAN Food Decay',
+    icon: ImageIcon,
+    color: 'emerald',
+    model: 'Deep Convolutional GAN (DCGAN)',
+    purpose: 'Generate synthetic visual food quality & degradation states under delayed transit and temperature spikes.',
+    input: 'Food category + transit delay (min) + ambient temperature vector',
+    output: 'Freshness visual inspection frames + quality classification scores (0-100)',
     status: 'Trained',
   },
   {
@@ -135,6 +146,7 @@ const colorMap: Record<string, { bg: string; text: string; border: string; dot: 
   orange: { bg: 'bg-orange-100', text: 'text-orange-700', border: 'border-orange-200', dot: 'bg-orange-500' },
   red: { bg: 'bg-red-100', text: 'text-red-700', border: 'border-red-200', dot: 'bg-red-500' },
   green: { bg: 'bg-green-100', text: 'text-green-700', border: 'border-green-200', dot: 'bg-green-500' },
+  emerald: { bg: 'bg-emerald-100', text: 'text-emerald-700', border: 'border-emerald-200', dot: 'bg-emerald-500' },
 };
 
 interface StepDetailProps {
@@ -192,8 +204,9 @@ export const Models: React.FC = () => {
   const [selectedStep, setSelectedStep] = useState<typeof pipelineSteps[0] | null>(null);
 
   const modelComponents = [
-    { name: 'Conditional GAN', type: 'Generator', status: 'Trained', records: '25K historical + 75K synthetic', accuracy: '94.2%', color: 'violet' },
-    { name: 'Variational Autoencoder', type: 'Anomaly Detector', status: 'Trained', records: '25K records', accuracy: '91.8%', color: 'red' },
+    { name: 'Conditional GAN', type: 'Scenario Generator (cGAN)', status: 'Trained', records: '25K historical + 75K synthetic', accuracy: '94.2%', color: 'violet' },
+    { name: 'DCGAN Food Decay', type: 'Quality Visualizer (DCGAN)', status: 'Trained', records: '12,500 food decay frames', accuracy: 'FID: 18.4', color: 'emerald' },
+    { name: 'Variational Autoencoder', type: 'Anomaly Detector (VAE)', status: 'Trained', records: '25K records', accuracy: '91.8%', color: 'red' },
     { name: 'LLM Agent Engine', type: 'Language Model', status: 'Online', records: 'API-based', accuracy: 'GPT-4 class', color: 'indigo' },
     { name: 'Scenario Generator', type: 'Sampling Engine', status: 'Online', records: '—', accuracy: '1K–5K/run', color: 'amber' },
     { name: 'Stress Simulator', type: 'Simulation Engine', status: 'Online', records: '—', accuracy: 'Deterministic', color: 'orange' },
@@ -212,7 +225,7 @@ export const Models: React.FC = () => {
         {[
           { label: 'Total Records', value: '100,000', sub: '25K real + 75K synthetic', color: 'indigo' },
           { label: 'Scenarios/Run', value: '1,000', sub: 'Configurable 100–5,000', color: 'violet' },
-          { label: 'Models Trained', value: '2', sub: 'GAN + Autoencoder', color: 'blue' },
+          { label: 'Models Trained', value: '3', sub: 'cGAN + DCGAN + VAE', color: 'blue' },
           { label: 'System Status', value: 'Nominal', sub: 'All services online', color: 'green' },
         ].map((s) => (
           <Card key={s.label}>

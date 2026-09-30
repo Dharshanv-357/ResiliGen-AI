@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   ClipboardList, Zap, AlertTriangle, TrendingUp,
   CheckCircle, Circle, Loader2, ChevronRight, ArrowRight,
-  Truck, Users, Building2, Package, Activity
+  Truck, Users, Building2, Package, Activity, ImageIcon
 } from 'lucide-react';
 import { Card, Button, StatusBadge } from '../components/ui/Card';
 import { AnimatedCounter } from '../components/ui/AnimatedCounter';
@@ -242,11 +242,12 @@ export const Dashboard: React.FC = () => {
       >
         <Card>
           <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">Quick Actions</p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
             {[
               { label: 'Create New Plan', icon: ClipboardList, path: '/plans/create', color: 'indigo' },
               { label: 'Generate Scenarios', icon: Zap, path: '/scenarios', color: 'violet' },
               { label: 'Run Simulation', icon: Activity, path: '/simulator', color: 'blue' },
+              { label: 'DCGAN Food Decay', icon: ImageIcon, path: '/food-condition', color: 'emerald' },
               { label: 'View AI Analysis', icon: Users, path: '/agents', color: 'amber' },
             ].map((action) => {
               const Icon = action.icon;
@@ -258,6 +259,7 @@ export const Dashboard: React.FC = () => {
                     action.color === 'indigo' ? 'border-indigo-200 hover:bg-indigo-50 hover:border-indigo-300 text-indigo-600' :
                     action.color === 'violet' ? 'border-violet-200 hover:bg-violet-50 hover:border-violet-300 text-violet-600' :
                     action.color === 'blue' ? 'border-blue-200 hover:bg-blue-50 hover:border-blue-300 text-blue-600' :
+                    action.color === 'emerald' ? 'border-emerald-200 hover:bg-emerald-50 hover:border-emerald-300 text-emerald-600' :
                     'border-amber-200 hover:bg-amber-50 hover:border-amber-300 text-amber-600'
                   }`}
                 >

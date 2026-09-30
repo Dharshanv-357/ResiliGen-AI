@@ -63,6 +63,7 @@ Community Food Redistribution Plan
 | Component | Technology | Role |
 |-----------|-----------|------|
 | **Conditional GAN** | PyTorch / TensorFlow | Generates synthetic redistribution scenarios conditioned on stress labels |
+| **DCGAN** | PyTorch (DCGAN) | Generates synthetic visual food decay frames conditioned on transit delay & temp spikes |
 | **Autoencoder (VAE)** | PyTorch | Detects anomalous failure patterns in simulation results |
 | **Multi-Agent LLM** | LLM API (GPT-4 class) | 5 specialized agents analyze scenarios from different operational lenses |
 | **Stress Simulator** | Python engine | Deterministic simulation of redistribution plans under generated conditions |
@@ -85,6 +86,7 @@ Community Food Redistribution Plan
 | Recommendations | `/recommendations` | Apply/reject AI-generated plan improvements |
 | Before vs After | `/comparison` | Side-by-side resilience comparison |
 | Simulation History | `/history` | Log of all past stress tests |
+| DCGAN Food Quality | `/food-condition` | Synthetic visual food condition inspection & decay analysis |
 | Model Status | `/models` | GenAI pipeline visualization, model health |
 | Dataset | `/dataset` | Dataset statistics and feature list |
 | Settings | `/settings` | Risk thresholds, model config, notifications |
@@ -250,6 +252,21 @@ Five specialized agents analyze each critical scenario:
 | **Demand Agent** | Evaluates beneficiary demand variation across zones |
 | **Capacity Agent** | Evaluates NGO storage limits and overflow risk |
 | **Devil's Advocate** | Actively searches for the worst-case condition that breaks the plan |
+
+---
+
+## DCGAN Food Quality & Spoilage Module
+
+IdeaStress AI includes a **Deep Convolutional GAN (DCGAN)** module dedicated to food freshness assessment under severe operational stress:
+
+- **Motivation**: While tabular data predicts transit delays and temperature exposure, logistics teams need visual confirmation of food degradation to make go/no-go distribution decisions.
+- **Generator**: Transposed convolution architecture generates photorealistic visual inspection snapshots of food conditions (Fresh `0-30 min`, At-Risk `60-90 min`, Expired `120+ min`).
+- **Discriminator**: Convolutional feature extractor trained to distinguish synthetic degradation states from real perishable spoilage telemetry.
+- **Interactive UI (`/food-condition`)**:
+  - Side-by-side condition viewer comparing fresh vs degraded food samples.
+  - Per-donor perishable food batch breakdown with live DCGAN quality scores.
+  - Interactive simulator slider: drag transit delay from 0 to 180 minutes to witness real-time visual degradation and quality drop.
+  - DCGAN architecture breakdown: Generator & Discriminator layer specs, loss curves, and FID benchmarks.
 
 ---
 
